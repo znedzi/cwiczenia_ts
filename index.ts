@@ -1,4 +1,5 @@
 import { Restaurant } from "./restaurant";
+import { RestaurantEventName } from "./types/restaurant-events";
 
 const megaRestaurant = new Restaurant(); //tworzymy nowy obiekt na bazie naszej klasy
 
@@ -8,17 +9,18 @@ let tablesCount = 25;
 megaRestaurant
    //.once (ang. raz) oznacza, że zdarzenie chcemy obsłuzyć tylko jeden raz
    //.on (ang. na) obsługa wielokrotna zdarzenia (nasłuchuj na)
-    .once("open", () => {
+   //RestaurantEvent.Open zaimportowano z pliku types/restaurant-events.ts (enum - lista)
+    .once(RestaurantEventName.Open, () => {
         console.log("Otwarto restaurację"); 
         console.log(`W restauracji dostępnych jest ${tablesCount} stolików.`)
     })
     //.once (ang. raz) oznacza, że zdarzenie chcemy obsłuzyć tylko jeden raz
    //.on (ang. na) obsługa wielokrotna zdarzenia (nasłuchuj na)
-   .once("close", () => {
+   .once(RestaurantEventName.Close, () => {
     console.log("Zamknięto restaurację");
     })
     //nasłuchujemy zdarzenia tableCountUpdate z dodatkowym parametrem change
-    .on('tableCountUpdate', change => {
+    .on(RestaurantEventName.TableCountUpdate, change => {
       if(change === -1) {
         tablesCount += change;
         console.log(`Wzięto stolik. Dostępnych stolików ${tablesCount}.`);
