@@ -9,7 +9,7 @@ class TickTok extends EventEmitter {
     super();
     
     setInterval(()=> {
-        this.emit('secondElapsed');
+        this.emit('secondElapsed', 'wysyłam_dodatkowy_parametr');
     }, 1000);
 
     setInterval(()=> {
