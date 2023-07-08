@@ -1,6 +1,8 @@
 import { Restaurant } from "./restaurant";
 
 const megaRestaurant = new Restaurant(); //tworzymy nowy obiekt na bazie naszej klasy
+
+//początkowa liczba stolików
 let tablesCount = 25;
 
 megaRestaurant
@@ -10,19 +12,22 @@ megaRestaurant
         console.log("Otwarto restaurację"); 
         console.log(`W restauracji dostępnych jest ${tablesCount} stolików.`)
     })
-    .on('decTable', () => {
-      tablesCount--;
-      console.log(`Wzięto stolik. Dostępnych stolików ${tablesCount}.`);
-    })
-    .on('incTable', () => {
-      tablesCount++;
-      console.log(`Zwolniono stolik. Dostępnych stolików ${tablesCount}.`);
-    })
-   //.once (ang. raz) oznacza, że zdarzenie chcemy obsłuzyć tylko jeden raz
+    //.once (ang. raz) oznacza, że zdarzenie chcemy obsłuzyć tylko jeden raz
    //.on (ang. na) obsługa wielokrotna zdarzenia (nasłuchuj na)
-    .once("close", () => {
+   .once("close", () => {
     console.log("Zamknięto restaurację");
-  });
+    })
+    //nasłuchujemy zdarzenia tableCountUpdate z dodatkowym parametrem change
+    .on('tableCountUpdate', change => {
+      if(change === -1) {
+        tablesCount += change;
+        console.log(`Wzięto stolik. Dostępnych stolików ${tablesCount}.`);
+      } else {
+        tablesCount += change;
+        console.log(`Zwolniono stolik. Dostępnych stolików ${tablesCount}.`);
+      }    
+    });
+  
 
 //wywołujemy na naszym obiekcie kolejne metody, aby wyemitowały zdarzenie na które nasłuchujemy
 megaRestaurant.open();
@@ -44,5 +49,7 @@ megaRestaurant.takeTableWithoutReservation(); // "Dostepnych stolików: 20."
 megaRestaurant.takeTableWithoutReservation(); // "Dostepnych stolików: 19."
 
 megaRestaurant.cleanupTable(); // "Dostepnych stolików: 20."
+
+megaRestaurant.cleanupTable(); // "Dostepnych stolików: 21."
 
 megaRestaurant.close(); // "Zamknięto restaurację."

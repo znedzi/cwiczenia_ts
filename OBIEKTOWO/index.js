@@ -3,6 +3,7 @@ const {TickTok} = require('./obiekt_events');
 const {log} = require('console');
 
 new TickTok()
+
     .on('secondElapsed', odbieram_dodatkowy_parametr => { 
         log('Hi.', odbieram_dodatkowy_parametr);
         })

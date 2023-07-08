@@ -21,7 +21,7 @@ const events = genZdarzenie();
 
 //zapis powyższy możemy wykonać również w ten sposób:
 events
-    .on('secondElapsed', nasz_parametr => { 
+    .on('secondElapsed', (nasz_parametr) => { 
         log('Hi.', nasz_parametr);
         })
 
