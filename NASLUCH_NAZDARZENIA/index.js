@@ -5,6 +5,16 @@ const {genZdarzenie} = require('./event_emituj_zdarzenie');
 //uruchamiamy naszą funkcję generuj zdarzenie
 const events = genZdarzenie();
 
-events.on('secondElapsed', ()=> {
-    log('Hi.')
+//tutaj nasłuchujemy na zdarzenie secondElapsed jeśli wystąpi uruchamiamy tę funkcję
+events.on('secondElapsed', nasz_parametr => {
+    log('Hi.', nasz_parametr);
 });
+
+
+events.on('fiveSecondElapsed', inny_parametr => {
+    log('Hello.', inny_parametr);
+});
+
+//emit - uruchamiamy zdarzenie
+//on - reagujemy na zdarzenie (za każdym razem)
+//once - reagujemy na zdarzenie, ale tylko jeden raz

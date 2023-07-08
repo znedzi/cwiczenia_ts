@@ -21,11 +21,20 @@ function genZdarzenie() {
         //wysyłamy co sekundę nasze zdarzenie
         //od teraz w głównym pliku naszego programu możemy basłuchiwać na to zdarzenie
         //tak samo jak np. na click, mouseOver itp.
-        ee.emit('secondElapsed');
+        // po secondElapsed możemy dodatkowo podawać parametry (liczy się ich kolejność, a nie nazwa i parametry te możemy później odbierać.) Parametrem może być dowolna wartość to może być obiekt, jakaś tablica itp.
+        ee.emit('secondElapsed', 'Wysyłamy_Parametr_testowy', 'Drugi_parametr');
 
     },1000);
 
-    //zwracamy nasz obiekt co 1 sekundę aby przekazać go do pliku index.js, który oczekuje na zdarzenie
+
+    setInterval(()=> {
+
+        ee.emit('fiveSecondElapsed', 'Wysyłamy_Parametr_testowy', 'Drugi_parametr');
+
+    },5000);
+
+    //zwracamy nasze obiekty, pierwszy co 1 sekundę, drugi co 5 sekund, aby przekazać go do pliku index.js, w pliku indeks.js odbieramy wysłane zdarzenia. Zdarzenia możemy odebrać w dowolnym pliku.
+
     return ee;
 };
 

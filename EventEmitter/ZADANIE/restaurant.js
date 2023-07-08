@@ -5,12 +5,14 @@ class Restaurant extends EventEmitter {
      * Otwarcie restauracji.
      */
     open() {
+        //generujemy własne zdarzenie np. open
         this.emit('open');
     }
 
     /**
      * Zamknięcie restauracji.
      */
+    //generujemy własne zdarzenie np. close,  itd...
     close() {
         this.emit('close');
     }
